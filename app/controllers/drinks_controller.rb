@@ -17,6 +17,13 @@ class DrinksController < ApplicationController
     @drinks = Drink.page(params[:page])
   end
 
+  def destroy
+    @drink = Drink.find(params[:id])
+    @drink.destroy
+    flash[:notice] = 'Drink deleted.'
+    redirect_to drinks_path
+  end
+
   protected
   def drink_params
     params.require(:drink).permit(:title, :description)
